@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import PizzaForm from "./PizzaForm";
+import PizzaForm from "./Components/PizzaForm";
 import { Route, Link, Switch } from "react-router-dom";
-import Home from './Home';
+import Home from './Components/Home';
 import axios from 'axios';
 import * as yup from 'yup';
-import formSchema from "./formScheme";
+import formSchema from "./Components/formScheme";
 
 const initialFormValues = {
   size: '',
