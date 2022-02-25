@@ -24,9 +24,9 @@ const initialFormErrors = {
 
 export default function App() {
   const [order, setOrder] = useState([]);
-  const [formValues, setFormValues] = useState(initialFormValues)
+  const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
-
+  const [disabled, setDisabled] = useState(true);
   
   const getOrders = () => {
     axios.get('https://reqres.in/api/orders')
@@ -38,7 +38,7 @@ export default function App() {
   const postNewOrder = newOrder => {
     axios.post('https://reqres.in/api/orders', newOrder)
     .then(response => {
-      setOrder([response.data.data, order]);
+      setOrder([response.data.data, ...order]);
       setFormValues(initialFormValues);
     }).catch(err => console.error(err))
   }
@@ -54,11 +54,22 @@ export default function App() {
     validate(name, value);
     setFormValues({...formValues, [name]: value})
   }
+
+  const formSubmit = () => {
+    const newOrder = {
+      name: formValues.name.trim()
+    }
+    postNewOrder(newOrder);
+  }
   
 
   useEffect(() => {
     getOrders()
   }, []);
+
+  useEffect(() => {
+    formSchema.isValid(formValues).then(valid => setDisabled(!valid))
+  }, [formValues])
 
   return (
     <>
@@ -76,6 +87,7 @@ export default function App() {
           <PizzaForm
             values={formValues}
             toChange={inputChange}
+            errors={formErrors}
           />
         </Route>
         <Route path="/">

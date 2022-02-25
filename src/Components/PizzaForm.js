@@ -7,6 +7,9 @@ export default function PizzaForm(props) {
         <h2>Build Your Own Pizza</h2>
       </header>
       <form id="pizza-form">
+        <div>
+          {props.errors.name}
+        </div>
         <h3>Build Your Own Pizza</h3>
         <div>
           <h3>Choice of Size</h3>
