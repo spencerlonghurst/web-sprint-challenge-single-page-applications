@@ -8,12 +8,12 @@ import formSchema from "./formScheme";
 
 const initialFormValues = {
   size: '',
-  name: '',
-  special: '',
   topping1: false,
   topping2: false,
   topping3: false,
-  topping4: false
+  topping4: false,
+  special: '',
+  name: '',
 }
 
 const initialFormErrors = {
@@ -27,13 +27,6 @@ export default function App() {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(true);
-  
-  const getOrders = () => {
-    axios.get('https://reqres.in/api/orders')
-    .then(response => {
-      setOrder(response.data.data);
-    }).catch(err => console.error(err))
-  };
 
   const postNewOrder = newOrder => {
     axios.post('https://reqres.in/api/orders', newOrder)
@@ -61,11 +54,6 @@ export default function App() {
     }
     postNewOrder(newOrder);
   }
-  
-
-  useEffect(() => {
-    getOrders()
-  }, []);
 
   useEffect(() => {
     formSchema.isValid(formValues).then(valid => setDisabled(!valid))
@@ -88,6 +76,7 @@ export default function App() {
             values={formValues}
             toChange={inputChange}
             errors={formErrors}
+            submit={formSubmit}
           />
         </Route>
         <Route path="/">
