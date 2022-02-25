@@ -1,6 +1,13 @@
 import React from 'react';
-
+import pizzaPic from './Pizza.jpg'
 import { useHistory } from 'react-router-dom';
+
+
+
+console.log(pizzaPic);
+
+
+
 
 export default function Home () {
 
@@ -13,7 +20,7 @@ export default function Home () {
   return (
     <div>
       <h1>THIS IS THE HOME</h1>
-      {/* <img src='../../Assets/Pizza.jpg'></img> */}
+      <img src={pizzaPic}></img>
       <button id='order-pizza' onClick={routeToPizza}>Pizza?</button>
     </div>
   )
