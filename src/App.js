@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import PizzaForm from "./Components/PizzaForm";
 import { Route, Link, Switch } from "react-router-dom";
-import Home from './Components/Home';
+import Home from './Home';
 import axios from 'axios';
 import * as yup from 'yup';
 import formSchema from "./Components/formScheme";
+import './App.css';
 
 const initialFormValues = {
   size: '',
@@ -33,7 +34,7 @@ export default function App() {
     .then(response => {
       setOrder([response.data.data, ...order]);
       setFormValues(initialFormValues);
-    }).catch(err => console.error(err))
+    }).catch(err => console.log(err))
   }
 
   const validate = (name, value) => {
@@ -62,7 +63,7 @@ export default function App() {
   return (
     <>
       <nav>
-        <h1>Lambda Eats</h1>
+        <h1>BloomTech Eats</h1>
         <div>
           <Link to="/">Home</Link>
           <Link to="/pizza">Pizza?</Link>
@@ -77,6 +78,7 @@ export default function App() {
             toChange={inputChange}
             errors={formErrors}
             submit={formSubmit}
+            disabled={disabled}
           />
         </Route>
         <Route path="/">

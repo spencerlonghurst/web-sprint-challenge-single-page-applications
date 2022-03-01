@@ -4,6 +4,6 @@ describe('Pizza App', () => {
   })
 
   it('sanity test!!', () => {
-    expect(1 + 2).toBe.equal(3);
+    expect(1 + 2).to.equal(3);
   })
 })
